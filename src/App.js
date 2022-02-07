@@ -1,23 +1,33 @@
-import logo from './logo.svg';
 import './App.css';
+import Reddit from './components/reddit';
+import Joke from './components/joke';
+import { useState } from 'react';
 
 function App() {
+  const [redditVisible, setRedditVisible] = useState(false)
+  const [jokeVisible, setJokeVisible] = useState(false)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick = {()=> {
+        setRedditVisible(prev=> !prev)
+        //setJokeVisible(pre=>!pre)
+        if(jokeVisible){
+          setJokeVisible(false)
+        }
+        }}>Toggle Reddit</button>
+      <button onClick = {()=> {
+        setJokeVisible(prev=> !prev)
+        if(redditVisible)
+        {
+          setRedditVisible(false)
+        }
+        //setRedditVisible(prev=> !prev)
+        }}>Toggle Joke</button>
+
+      <div>
+        {redditVisible && <Reddit/>}
+        {jokeVisible && <Joke/>}
+      </div>
     </div>
   );
 }
